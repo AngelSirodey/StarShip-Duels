@@ -6,10 +6,10 @@ function StarShipCanvas() {
 
 
 
-StarShipCanvas.prototype.UpdateCanvas = function(ship) {
+StarShipCanvas.prototype.UpdateCanvas = function (ship) {
     this.ctx.clearRect(0, 0, 1600, 900);
     ship.drawShip(this);
-    
+
 }
 
 
