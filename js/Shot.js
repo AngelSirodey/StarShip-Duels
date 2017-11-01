@@ -1,17 +1,24 @@
-function Shot(ship) {
-    this.x = ship.x + 20;
-    this.y = ship.y + 17;
-    this.speed = 20;
+function Shot(x, y, img, w, h) {
+    this.x = x;
+    this.y = y;
     this.image = new Image();
-    this.image.src = "../img/red-shot.png";
+    this.image.src = img;
+    this.width = w;
+    this.height = h;
 }
 
 Shot.prototype.update = function () {
-        this.x += 20;
+     this.x += 20;
+     this.drawBullet();
 }
 
-Shot.prototype.drawBullet = function (canvas) {   
-    canvas.ctx.drawImage(this.image, this.x, this.y, 20, 15);
+Shot.prototype.update2 = function () {
+    this.x -= 20;
+    this.drawBullet();
+}
+
+Shot.prototype.drawBullet = function () {   
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 }
 
 
