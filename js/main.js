@@ -1,14 +1,13 @@
 var shipBullets = [];
 var shipBullets2 = [];
-var asteroidPool = [];
 var ctx
 
 window.onload = function () {
     ctx = document.getElementById("canvas").getContext("2d");
-    document.getElementById('startButton').onclick = function () {
+    document.getElementById('btn').onclick = function () {
         startGame()
     };
-    
+
 
     document.onkeydown = function (e) {
 
@@ -54,10 +53,8 @@ function startGame() {
     game = new StarShipCanvas();
     game.ship.drawShip();
     game.ship2.drawShip();
-    game.asteroid.drawAsteroid();
-    game.asteroid.moveAsteroid();
-    game.asteroid2.drawAsteroid();
-    game.asteroid2.moveAsteroid2();
+    game.asteroidPool[0].drawAsteroid();
+    game.asteroidPool[0].moveAsteroid();
     requestAnimationFrame(animate);
 }
 
@@ -65,12 +62,11 @@ function animate() {
     ctx.clearRect(0, 0, 1600, 900);
     game.ship.drawShip();
     game.ship2.drawShip();
-    game.asteroid.drawAsteroid();
-    game.asteroid.moveAsteroid();
-    game.asteroid2.drawAsteroid();
-    game.asteroid2.moveAsteroid2();
+    game.asteroidPool[0].drawAsteroid();
+    game.asteroidPool[0].moveAsteroid();
     updater();
     updater2();
+    updateAsteroid();
     requestAnimationFrame(animate);
 
 }
@@ -86,6 +82,13 @@ function updater2() {
     for (var i = 0; i < shipBullets2.length; i++) {
         shipBullets2[i].update2()
         checkCollisions2();
+    }
+}
+
+function updateAsteroid() {
+    for (var i = 0; i < game.asteroidPool.length; i++) {
+        game.asteroidPool[i].moveAsteroid();
+        asteroidCollision()
     }
 }
 //  Check for bullet / enemy collisions.
@@ -123,6 +126,34 @@ function checkCollisions2() {
             shipBullets.splice(i--, 1);
             isColliding = true;
             game.ship = new Ship(game.ship.x, game.ship.y, "../img/explo.png", 150, 150);
+            break;
+        }
+    }
+    if (isColliding) {
+        console.log('death');
+    }
+}
+
+function asteroidCollision() {
+    for (var i = 0; i < game.asteroidPool.length; i++) {
+        
+        var isColliding = false;
+        if (game.asteroidPool[i].x <= game.ship.x + game.ship.width &&
+            game.asteroidPool[i].x + game.asteroidPool[i].width >= game.ship.x &&
+            game.asteroidPool[i].y <= game.ship.y + game.ship.height &&
+            game.asteroidPool[i].height + game.asteroidPool[i].y >= game.ship.y) {
+                game.asteroidPool.splice(i--, 1);
+            isColliding = true;
+            game.ship = new Ship(game.ship.x, game.ship.y, "../img/explo.png", 150, 150);
+            break;
+        }
+        if (game.asteroidPool[i].x <= game.ship2.x + game.ship2.width &&
+            game.asteroidPool[i].x + game.asteroidPool[i].width >= game.ship2.x &&
+            game.asteroidPool[i].y <= game.ship2.y + game.ship2.height &&
+            game.asteroidPool[i].height + game.asteroidPool[i].y >= game.ship2.y) {
+            
+            isColliding = true;
+            game.ship2 = new Ship(game.ship2.x, game.ship2.y, "../img/explo.png", 150, 150);           
             break;
         }
     }
