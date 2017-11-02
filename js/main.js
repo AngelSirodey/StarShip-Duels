@@ -1,6 +1,6 @@
 var shipBullets = [];
 var shipBullets2 = [];
-// var asteroidsArr = [];
+var asteroidPool = [];
 var ctx
 
 window.onload = function () {
@@ -9,6 +9,7 @@ window.onload = function () {
         startGame()
     };
     
+
     document.onkeydown = function (e) {
 
         switch (e.keyCode) {
@@ -53,7 +54,10 @@ function startGame() {
     game = new StarShipCanvas();
     game.ship.drawShip();
     game.ship2.drawShip();
-    // game.asteroid.drawAsteroid();
+    game.asteroid.drawAsteroid();
+    game.asteroid.moveAsteroid();
+    game.asteroid2.drawAsteroid();
+    game.asteroid2.moveAsteroid2();
     requestAnimationFrame(animate);
 }
 
@@ -61,11 +65,14 @@ function animate() {
     ctx.clearRect(0, 0, 1600, 900);
     game.ship.drawShip();
     game.ship2.drawShip();
-    // game.asteroid.drawAsteroid();
-    // asteroidUpdater();    
+    game.asteroid.drawAsteroid();
+    game.asteroid.moveAsteroid();
+    game.asteroid2.drawAsteroid();
+    game.asteroid2.moveAsteroid2();
     updater();
     updater2();
     requestAnimationFrame(animate);
+
 }
 
 function updater() {
@@ -81,12 +88,6 @@ function updater2() {
         checkCollisions2();
     }
 }
-
-// function asteroidUpdater(){
-//     for (var i = 0; i < asteroidsArr.length; i++){
-//         asteroidsArr[i].asteroidMove()
-//     }
-// }
 //  Check for bullet / enemy collisions.
 function checkCollisions() {
     for (var i = 0; i < shipBullets.length; i++) {

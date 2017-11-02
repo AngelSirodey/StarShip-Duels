@@ -1,3 +1,48 @@
+
+function Ball(x, y) {
+    this.x = x;
+    this.y = y;
+    this.vx = 10;
+    this.vy = 10;
+    this.radius = 25;
+    this.image = new Image();
+    this.image.src = "../img/asteroid.png";
+};
+
+Ball.prototype.drawAsteroid = function () {
+    ctx.drawImage(this.image, this.x, this.y, 100, 100);
+}
+
+Ball.prototype.moveAsteroid = function () {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.y + this.vy > canvas.height - 100 || this.y + this.vy < 0) {
+        this.vy *= -1;
+    }
+    if (this.x + this.vx > canvas.width -100 || this.x + this.vx < 0) {
+        this.vx *= -1;
+    }
+}
+
+
+Ball.prototype.moveAsteroid2 = function () {
+    this.x -= this.vx;
+    this.y -= this.vy;
+    if (this.y - this.vy > canvas.height - 100 || this.y - this.vy < 0) {
+        this.vy *= -1;
+    }
+    if (this.x - this.vx > canvas.width -100 || this.x - this.vx < 0) {
+        this.vx *= -1;
+    }
+}
+
+// for (var i = 0; i < this.asteroidTotal; i++) {
+//     this.asteroids.push([this.asteroid_x, this.asteroid_y, this.asteroid_width, this.asteroid_height, this.speed]);
+//     this.asteroid_x += this.asteroid_width + 60;
+// }
+
+//---------------------------------------
+
 // function Asteroid(x, y, img, w, h) {
 //     this.x = 700;
 //     this.y = 400;
@@ -25,7 +70,7 @@
 
 
 
-  
+// ------------------------------------------
 
 
 // function Asteroid() {
