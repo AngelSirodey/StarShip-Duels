@@ -18,9 +18,16 @@ Ship.prototype.downMove = function () {
 Ship.prototype.leftMove = function () {
   if (this.x > 0) this.x -= 20
 }
+Ship.prototype.leftMove2 = function () {
+  if (this.x > 900) this.x -= 20
+}
 
 Ship.prototype.rightMove = function () {
   if (this.x < 600) this.x += 20
+}
+
+Ship.prototype.rightMove2 = function () {
+  if (this.x < 1500) this.x += 20
 }
 
 Ship.prototype.drawShip = function () {

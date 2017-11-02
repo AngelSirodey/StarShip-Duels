@@ -1,12 +1,14 @@
 var shipBullets = [];
 var shipBullets2 = [];
+// var asteroidsArr = [];
 var ctx
+
 window.onload = function () {
     ctx = document.getElementById("canvas").getContext("2d");
     document.getElementById('startButton').onclick = function () {
         startGame()
     };
-
+    
     document.onkeydown = function (e) {
 
         switch (e.keyCode) {
@@ -33,18 +35,16 @@ window.onload = function () {
                 game.ship2.downMove();
                 break;
             case 37: // left arrow
-                game.ship2.leftMove();
+                game.ship2.leftMove2();
                 break;
             case 39: // right arrow
-                game.ship2.rightMove();
+                game.ship2.rightMove2();
                 break;
             case 190: // . 
                 game.shot2 = new Shot(game.ship2.x + 2, game.ship2.y + 5, "../img/green222-shot.png", 90, 70)
                 shipBullets2.push(game.shot2);
                 break;
-
         }
-
         game.UpdateCanvas();
     }
 };
@@ -53,6 +53,7 @@ function startGame() {
     game = new StarShipCanvas();
     game.ship.drawShip();
     game.ship2.drawShip();
+    // game.asteroid.drawAsteroid();
     requestAnimationFrame(animate);
 }
 
@@ -60,24 +61,42 @@ function animate() {
     ctx.clearRect(0, 0, 1600, 900);
     game.ship.drawShip();
     game.ship2.drawShip();
-    game.shot.update();
-    game.shot2.update2();
-    checkCollisions();
-    checkCollisions2();
+    // game.asteroid.drawAsteroid();
+    // asteroidUpdater();    
+    updater();
+    updater2();
     requestAnimationFrame(animate);
 }
 
+function updater() {
+    for (var i = 0; i < shipBullets.length; i++) {
+        shipBullets[i].update();
+        checkCollisions();
+    }
+}
+
+function updater2() {
+    for (var i = 0; i < shipBullets2.length; i++) {
+        shipBullets2[i].update2()
+        checkCollisions2();
+    }
+}
+
+// function asteroidUpdater(){
+//     for (var i = 0; i < asteroidsArr.length; i++){
+//         asteroidsArr[i].asteroidMove()
+//     }
+// }
 //  Check for bullet / enemy collisions.
 function checkCollisions() {
     for (var i = 0; i < shipBullets.length; i++) {
         //var ship = shipBullets[i];
         var isColliding = false;
 
-        if (game.shot.x <= game.ship2.x + game.ship2.width &&
-            game.shot.x + game.shot.width >= game.ship2.x &&
-            game.shot.y <= game.ship2.y + game.ship2.height &&
-            game.shot.height + game.shot.y >= game.ship2.y) {
-
+        if (shipBullets[i].x <= game.ship2.x + game.ship2.width &&
+            shipBullets[i].x + shipBullets[i].width >= game.ship2.x &&
+            shipBullets[i].y <= game.ship2.y + game.ship2.height &&
+            shipBullets[i].height + shipBullets[i].y >= game.ship2.y) {
             //  Remove the bullet, set 'isColliding' so we don't process this bullet again.
             shipBullets.splice(i--, 1);
             isColliding = true;
@@ -87,21 +106,18 @@ function checkCollisions() {
     }
     if (isColliding) {
         console.log('death');
-
     }
 }
-
 
 function checkCollisions2() {
     for (var i = 0; i < shipBullets2.length; i++) {
         //var ship = shipBullets[i];
         var isColliding = false;
 
-        if (game.shot2.x <= game.ship.x + game.ship.width &&
-            game.shot2.x + game.shot2.width >= game.ship.x &&
-            game.shot2.y <= game.ship.y + game.ship.height &&
-            game.shot2.height + game.shot2.y >= game.ship.y) {
-
+        if (shipBullets2[i].x <= game.ship.x + game.ship.width &&
+            shipBullets2[i].x + shipBullets2[i].width >= game.ship.x &&
+            shipBullets2[i].y <= game.ship.y + game.ship.height &&
+            shipBullets2[i].height + shipBullets2[i].y >= game.ship.y) {
             //  Remove the bullet, set 'isColliding' so we don't process this bullet again.
             shipBullets.splice(i--, 1);
             isColliding = true;
@@ -111,6 +127,5 @@ function checkCollisions2() {
     }
     if (isColliding) {
         console.log('death');
-
     }
 }
