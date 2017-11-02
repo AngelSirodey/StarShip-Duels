@@ -1,14 +1,16 @@
 var shipBullets = [];
 var shipBullets2 = [];
 var ctx
+var backAudio = new Audio("../sounds/back.mp3");
+var explosionSound = new Audio('../sounds/Explosion.mp3');
 
 window.onload = function () {
     ctx = document.getElementById("canvas").getContext("2d");
     document.getElementById('btn').onclick = function () {
-        startGame()
+        startGame();
     };
 
-
+    
     document.onkeydown = function (e) {
 
         switch (e.keyCode) {
@@ -94,7 +96,6 @@ function updateAsteroid() {
 //  Check for bullet / enemy collisions.
 function checkCollisions() {
     for (var i = 0; i < shipBullets.length; i++) {
-        //var ship = shipBullets[i];
         var isColliding = false;
 
         if (shipBullets[i].x <= game.ship2.x + game.ship2.width &&
@@ -105,6 +106,7 @@ function checkCollisions() {
             shipBullets.splice(i--, 1);
             isColliding = true;
             game.ship2 = new Ship(game.ship2.x, game.ship2.y, "../img/explo.png", 150, 150);
+            explosionSound.play();
             break;
         }
     }
@@ -115,7 +117,6 @@ function checkCollisions() {
 
 function checkCollisions2() {
     for (var i = 0; i < shipBullets2.length; i++) {
-        //var ship = shipBullets[i];
         var isColliding = false;
 
         if (shipBullets2[i].x <= game.ship.x + game.ship.width &&
@@ -126,6 +127,7 @@ function checkCollisions2() {
             shipBullets.splice(i--, 1);
             isColliding = true;
             game.ship = new Ship(game.ship.x, game.ship.y, "../img/explo.png", 150, 150);
+            explosionSound.play();
             break;
         }
     }
@@ -142,9 +144,10 @@ function asteroidCollision() {
             game.asteroidPool[i].x + game.asteroidPool[i].width >= game.ship.x &&
             game.asteroidPool[i].y <= game.ship.y + game.ship.height &&
             game.asteroidPool[i].height + game.asteroidPool[i].y >= game.ship.y) {
-                game.asteroidPool.splice(i--, 1);
+        
             isColliding = true;
             game.ship = new Ship(game.ship.x, game.ship.y, "../img/explo.png", 150, 150);
+            explosionSound.play();
             break;
         }
         if (game.asteroidPool[i].x <= game.ship2.x + game.ship2.width &&
@@ -153,7 +156,8 @@ function asteroidCollision() {
             game.asteroidPool[i].height + game.asteroidPool[i].y >= game.ship2.y) {
             
             isColliding = true;
-            game.ship2 = new Ship(game.ship2.x, game.ship2.y, "../img/explo.png", 150, 150);           
+            game.ship2 = new Ship(game.ship2.x, game.ship2.y, "../img/explo.png", 150, 150);
+            explosionSound.play();         
             break;
         }
     }
