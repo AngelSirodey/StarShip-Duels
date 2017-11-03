@@ -114,15 +114,15 @@ function checkCollisions() {
             isColliding = true;
             game.ship2 = new Ship(game.ship2.x, game.ship2.y, "../img/explo.png", 150, 150);
             explosionSound.play();
-            // setTimeout (function () {
-            //     window.location.href = "../index.html";
-            // }, 3000)
-                       
             break;
         }
         
     }
     if (isColliding) {
+        gameOver()
+        setTimeout (function () {
+            window.location.href = "../index.html";
+        }, 4000)
         console.log('death');
     }
 }
@@ -140,14 +140,14 @@ function checkCollisions2() {
             isColliding = true;
             game.ship = new Ship(game.ship.x, game.ship.y, "../img/explo.png", 150, 150);
             explosionSound.play();
-            $('#gameOver').removeClass('display');
-            // setTimeout (function () {
-            //     window.location.href = "../index.html";
-            // }, 3000)
             break;
         }
     }
     if (isColliding) {
+        gameOver()
+        setTimeout (function () {
+            window.location.href = "../index.html";
+        }, 4000)
         console.log('death');
     }
 }
@@ -164,9 +164,6 @@ function asteroidCollision() {
             isColliding = true;
             game.ship = new Ship(game.ship.x, game.ship.y, "../img/explo.png", 150, 150);
             explosionSound.play();
-            // setTimeout (function () {
-            //     window.location.href = "../index.html";
-            // }, 3000)
             break;
         }
         if (game.asteroidPool[i].x <= game.ship2.x + game.ship2.width &&
@@ -176,16 +173,21 @@ function asteroidCollision() {
             
             isColliding = true;
             game.ship2 = new Ship(game.ship2.x, game.ship2.y, "../img/explo.png", 150, 150);
-            explosionSound.play();
-            // setTimeout (function () {
-            //     window.location.href = "../index.html";
-            // }, 3000)       
+            explosionSound.play();     
             break;
         }
     }
     if (isColliding) {
+        gameOver()
+        setTimeout (function () {
+            window.location.href = "../index.html";
+        }, 4000)
         console.log('death');
     }
+}
+
+function gameOver(){
+    $('#gameOver').removeClass('display')
 }
 
 // function asteroidCollisionShots() {

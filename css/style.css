@@ -38,6 +38,16 @@
     display:none;
 }
 
+#gameOver{
+    height: 400px;
+    width: 500px;
+    background-image: url('../img/gameOver2.png');
+    position: absolute;
+    margin: 200px 600px;
+    padding: 20px;
+    background-size: cover;
+}
+
 
 
 

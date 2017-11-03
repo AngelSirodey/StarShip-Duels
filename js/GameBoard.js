@@ -9,6 +9,7 @@ function StarShipCanvas() {
                         new Ball(1400, 600, 6, 6, "../img/asteroid.png", 150, 150),
                         new Ball(50, 100, 4, 4, "../img/asteroid.png", 200, 200),
                         new Ball(100, 700, 7, 7, "../img/asteroid.png", 100, 100)];
+
 }
 
 
