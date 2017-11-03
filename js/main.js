@@ -10,9 +10,7 @@ shotSound.volume = 0.2;
 
 window.onload = function () {
     ctx = document.getElementById("canvas").getContext("2d");
-
         startGame(); 
- 
 
     document.onkeydown = function (e) {
 
@@ -190,29 +188,4 @@ function gameOver(){
     $('#gameOver').removeClass('display')
 }
 
-// function asteroidCollisionShots() {
-//     for (var i = 0; i < game.asteroidPool.length; i++) {
-        
-//         var isColliding = false;
-//         if (game.shot.x <= game.asteroidPool[i].x + game.asteroidPool[i].width &&
-//             game.shot.x + game.shot.width >= game.asteroidPool[i].x &&
-//             game.shot.y <= game.asteroidPool[i].y + game.asteroidPool[i].height &&
-//             game.shot.height + game.shot.y >= game.asteroidPool[i].y) {
-//             shipBullets.splice(i, 1);                
-//             isColliding = true;
-//             break;
-//         }
-//         if (game.shot2.x <= game.asteroidPool[i].x + game.asteroidPool[i].width &&
-//             game.shot2.x + game.shot2.width >= game.asteroidPool[i].x &&
-//             game.shot2.y <= game.asteroidPool[i].y + game.asteroidPool[i].height &&
-//             game.shot2.height + game.shot2.y >= game.asteroidPool[i].y) {
-//             shipBullets2.splice(i, 1);
-//             isColliding = true;
-       
-//             break;
-//         }
-//     }
-//     if (isColliding) {
-//         console.log('death');
-//     }
-// }
+
