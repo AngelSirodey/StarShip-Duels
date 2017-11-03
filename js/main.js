@@ -1,13 +1,18 @@
 var shipBullets = [];
 var shipBullets2 = [];
 var ctx
-var backAudio = new Audio("../sounds/back.mp3");
-var explosionSound = new Audio('../sounds/Explosion.mp3');
+var backAudio = new Audio("../Audios/back.mp3");
+backAudio.volume = 0.1;
+var explosionSound = new Audio('../Audios/Explosion.mp3');
+explosionSound.volume = 0.5;
+var shotSound = new Audio('../Audios/rightS.mp3');
+shotSound.volume = 0.2;
+
 window.onload = function () {
     ctx = document.getElementById("canvas").getContext("2d");
-    document.getElementById('btn').onclick = function () {
+
         startGame(); 
-    };
+ 
 
     document.onkeydown = function (e) {
 
@@ -27,6 +32,7 @@ window.onload = function () {
             case 49: // 1
                 game.shot = new Shot(game.ship.x + 30, game.ship.y + 18, "../img/red222-shot.png", 60, 40);
                 shipBullets.push(game.shot);
+                shotSound.play();
                 break;
             case 38: // Up arrow
                 game.ship2.upMove();
@@ -43,6 +49,7 @@ window.onload = function () {
             case 190: // . 
                 game.shot2 = new Shot(game.ship2.x + 2, game.ship2.y + 5, "../img/green222-shot.png", 90, 70)
                 shipBullets2.push(game.shot2);
+                shotSound.play();
                 break;
         }
         game.UpdateCanvas();
@@ -107,6 +114,10 @@ function checkCollisions() {
             isColliding = true;
             game.ship2 = new Ship(game.ship2.x, game.ship2.y, "../img/explo.png", 150, 150);
             explosionSound.play();
+            // setTimeout (function () {
+            //     window.location.href = "../index.html";
+            // }, 3000)
+                       
             break;
         }
         
@@ -129,6 +140,10 @@ function checkCollisions2() {
             isColliding = true;
             game.ship = new Ship(game.ship.x, game.ship.y, "../img/explo.png", 150, 150);
             explosionSound.play();
+            $('#gameOver').removeClass('display');
+            // setTimeout (function () {
+            //     window.location.href = "../index.html";
+            // }, 3000)
             break;
         }
     }
@@ -149,6 +164,9 @@ function asteroidCollision() {
             isColliding = true;
             game.ship = new Ship(game.ship.x, game.ship.y, "../img/explo.png", 150, 150);
             explosionSound.play();
+            // setTimeout (function () {
+            //     window.location.href = "../index.html";
+            // }, 3000)
             break;
         }
         if (game.asteroidPool[i].x <= game.ship2.x + game.ship2.width &&
@@ -158,7 +176,10 @@ function asteroidCollision() {
             
             isColliding = true;
             game.ship2 = new Ship(game.ship2.x, game.ship2.y, "../img/explo.png", 150, 150);
-            explosionSound.play();         
+            explosionSound.play();
+            // setTimeout (function () {
+            //     window.location.href = "../index.html";
+            // }, 3000)       
             break;
         }
     }

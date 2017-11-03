@@ -5,12 +5,39 @@
     background-image: url('../img/bg.png')
 
     }
+#back {
+    position: absolute;
+    background-image: url("../img/backStart.jpg");
+    background-size: cover;
+     
+}
+
+#duels {
+    color: rgb(97, 92, 112);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 100px;
+    margin-left: 100px;
+
+}
 
 .start {
-    font-size: 20px;
-    border: 1px solid black;
+    color: rgb(98, 136, 207);
+    position: absolute;
+    font-size: 50px;
+    border: 2px solid rgb(98, 136, 207);
+    border-radius: 100px;
+    vertical-align: middle;
     text-decoration: none;
-    padding: 20px;
-    margin: 20px;
-    
+    padding: 30px 50px;
+    margin-top: 50px;
+    margin-left: 100px;
+
 }
+
+.display{
+    display:none;
+}
+
+
+
+
